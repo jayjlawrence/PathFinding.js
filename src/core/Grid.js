@@ -141,6 +141,7 @@ Grid.prototype.getNeighbors = function(node, allowDiagonal, dontCrossCorners) {
         s2 = false, d2 = false,
         s3 = false, d3 = false,
         nodes = this.nodes;
+    var crossSharpCorners = true;
 
     // ↑
     if (this.isWalkableAt(x, y - 1)) {
@@ -173,10 +174,10 @@ Grid.prototype.getNeighbors = function(node, allowDiagonal, dontCrossCorners) {
         d2 = s1 && s2;
         d3 = s2 && s3;
     } else {
-        d0 = s3 || s0;
-        d1 = s0 || s1;
-        d2 = s1 || s2;
-        d3 = s2 || s3;
+        d0 = crossSharpCorners || s3 || s0;
+        d1 = crossSharpCorners || s0 || s1;
+        d2 = crossSharpCorners || s1 || s2;
+        d3 = crossSharpCorners || s2 || s3;
     }
 
     // ↖
